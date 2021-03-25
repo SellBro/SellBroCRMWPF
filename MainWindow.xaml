@@ -6,5 +6,9 @@
         xmlns:local="clr-namespace:SellBroCRMWPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid/>
+    <Grid>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="202,217,0,0" VerticalAlignment="Top" Height="74" Width="126" Click="Button_Click"/>
+        <Button Content="Register" HorizontalAlignment="Left" Margin="474,217,0,0" VerticalAlignment="Top" Height="74" Width="129" Click="Button_Click_1"/>
+        <TextBlock Name="resp" HorizontalAlignment="Center" Margin="0,89,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="75" Width="256"/>
+    </Grid>
 </Window>
