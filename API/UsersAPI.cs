@@ -1,9 +1,8 @@
 ﻿using System.Net.Http;
 using System.Text;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Windows.Controls;
+using Newtonsoft.Json.Linq;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
 namespace SellBroCRMWPF.API
@@ -23,7 +22,8 @@ namespace SellBroCRMWPF.API
             var response = await client.PostAsync(Instance.Login, data);
             
             var res = response.Content.ReadAsStringAsync();
-            resp.Text = res.Result;
+            
+            ParseToken(res.Result, resp);
         }
 
         public static async void RegisterPostRequest(TextBlock resp)
@@ -38,12 +38,16 @@ namespace SellBroCRMWPF.API
             var response = await client.PostAsync(Instance.Register, data);
             
             var res = response.Content.ReadAsStringAsync();
-            resp.Text = res.Result; 
+            
+            ParseToken(res.Result, resp);
         }
         
-        private void ParseToken(string json)
+        private static void ParseToken(string json, TextBlock resp)
         {
-            
+            JObject obj = JObject.Parse(json);
+            string token = (string) obj.SelectToken("data.authToken");
+
+            resp.Text = token;
         }
     }
 }
