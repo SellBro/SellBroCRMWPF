@@ -1,7 +1,10 @@
 ﻿using System.Net.Http;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows.Controls;
+
 
 namespace SellBroCRMWPF.API
 {
@@ -38,7 +41,7 @@ namespace SellBroCRMWPF.API
             resp.Text = res.Result; 
         }
         
-        private void ParseToken()
+        private void ParseToken(string json)
         {
             
         }
