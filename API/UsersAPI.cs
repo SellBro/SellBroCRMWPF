@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.IO;
+using System.Net.Http;
 using System.Text;
 using System.Windows.Controls;
 using Newtonsoft.Json.Linq;
@@ -48,6 +49,17 @@ namespace SellBroCRMWPF.API
             string token = (string) obj.SelectToken("data.authToken");
 
             resp.Text = token;
+            
+            
+            MainWindow.Encrypt(token, Instance.MacAdress);
+            
+
+            FileStream stream = new FileStream(Instance.EnviromentPath + Instance.JwtFileName, FileMode.Create);
+            stream.Close();
+            
+            StreamWriter sw = new StreamWriter(Instance.EnviromentPath + Instance.JwtFileName, true, Encoding.UTF8);
+            sw.Write(token);
+            sw.Close();
         }
     }
 }
