@@ -12,7 +12,9 @@ namespace SellBroCRMWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string activeToken;
+        private CurrentUser currentUser;
+        
+        private bool saveData = true;
         
         public MainWindow()
         {
@@ -25,25 +27,29 @@ namespace SellBroCRMWPF
                 select nic.GetPhysicalAddress().ToString()
             ).FirstOrDefault();
             
-            resp.Text = Instance.MacAdress;
-            ValidateToken();
+            
+            currentUser = UsersAPI.LoadData();
+            if (currentUser.Email == "" || currentUser.Password == "")
+            {
+                // TODO: Handle no user data
+            }
+            currentUser.Token = UsersAPI.ValidateToken();
+            if (currentUser.Token == "")
+            {
+                // TODO: Handle no token
+            }
+            
+            resp.Text = currentUser.Email + "\n" + currentUser.Password + "\n" + currentUser.Token;
         }
 
-        private void ValidateToken()
-        {
-            string jwtPath = Instance.EnviromentPath + Instance.JwtFileName;
-            if (File.Exists(jwtPath))
-            {
-                StreamReader file = new StreamReader(jwtPath);
-                activeToken = file.ReadLine();
-                activeToken = AesOperation.DecryptString(Instance.MacAdress, activeToken);
-                resp.Text = activeToken;
-            }
-        }
-        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             UsersAPI.LoginPostRequest(resp);
+            if (saveData)
+            {
+                string[] dataToSave = {"Pepe@gamil.com", "322"};
+                UsersAPI.SaveData(dataToSave);
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

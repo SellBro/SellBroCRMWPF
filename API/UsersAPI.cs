@@ -49,7 +49,6 @@ namespace SellBroCRMWPF.API
             JObject obj = JObject.Parse(json);
             string token = (string) obj.SelectToken("data.authToken");
 
-            //resp.Text = token;
 
             token = AesOperation.EncryptString(Instance.MacAdress, token);
             resp.Text = token; 
@@ -60,6 +59,53 @@ namespace SellBroCRMWPF.API
             StreamWriter sw = new StreamWriter(Instance.EnviromentPath + Instance.JwtFileName, true, Encoding.UTF8);
             sw.Write(token);
             sw.Close();
+        }
+
+        public static string ValidateToken()
+        {
+            string activeToken = "";
+            string jwtPath = Instance.EnviromentPath + Instance.JwtFileName;
+            if (File.Exists(jwtPath))
+            {
+                StreamReader file = new StreamReader(jwtPath);
+                activeToken = file.ReadLine();
+                activeToken = AesOperation.DecryptString(Instance.MacAdress, activeToken);
+                file.Close();
+            }
+
+            return activeToken;
+        }
+        
+        public static void SaveData(string[] data)
+        {
+            FileStream stream = new FileStream(Instance.EnviromentPath + Instance.DataFileName, FileMode.Create);
+            stream.Close();
+            
+            StreamWriter sw = new StreamWriter(Instance.EnviromentPath + Instance.DataFileName, true, Encoding.UTF8);
+
+            foreach (string item in data)
+            {
+                string temp = AesOperation.EncryptString(Instance.MacAdress,item);
+                sw.Write(temp + "\n");
+            }
+            sw.Close();
+        }
+        
+        public static CurrentUser LoadData()
+        {
+            CurrentUser userToLoadIn = new CurrentUser {Email = "", Password = ""};
+            
+            string dataPath = Instance.EnviromentPath + Instance.DataFileName;
+            
+            if (File.Exists(dataPath))
+            {
+                StreamReader file = new StreamReader(dataPath);
+                userToLoadIn.Email = AesOperation.DecryptString(Instance.MacAdress, file.ReadLine());
+                userToLoadIn.Password = AesOperation.DecryptString(Instance.MacAdress, file.ReadLine());
+                file.Close();
+            }
+
+            return userToLoadIn;
         }
     }
 }
