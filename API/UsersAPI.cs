@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using Newtonsoft.Json.Linq;
 using SellBroCRMWPF.AES;
@@ -12,7 +13,7 @@ namespace SellBroCRMWPF.API
     public class UsersAPI
     {
         
-        public static async void LoginPostRequest(TextBlock resp)
+        public static async Task<bool> LoginPostRequest()
         {
             LoginUser loginUser = new LoginUser{Email = "Pepe228@gmail.com", Password = "228"};
             
@@ -25,10 +26,12 @@ namespace SellBroCRMWPF.API
             
             var res = response.Content.ReadAsStringAsync();
             
-            ParseToken(res.Result, resp);
+            ParseToken(res.Result);
+            // TODO: handle request
+            return true;
         }
 
-        public static async void RegisterPostRequest(TextBlock resp)
+        public static async Task<bool> RegisterPostRequest()
         {
             RegisterUser registerUser = new RegisterUser{Email = "Pepe228@gmail.com", Password = "228"};
             
@@ -41,17 +44,17 @@ namespace SellBroCRMWPF.API
             
             var res = response.Content.ReadAsStringAsync();
             
-            ParseToken(res.Result, resp);
+            ParseToken(res.Result);
+            // TODO: handle request
+            return true;
         }
         
-        private static void ParseToken(string json, TextBlock resp)
+        private static void ParseToken(string json)
         {
             JObject obj = JObject.Parse(json);
             string token = (string) obj.SelectToken("data.authToken");
 
-
             token = AesOperation.EncryptString(Instance.MacAdress, token);
-            resp.Text = token; 
 
             FileStream stream = new FileStream(Instance.EnviromentPath + Instance.JwtFileName, FileMode.Create);
             stream.Close();

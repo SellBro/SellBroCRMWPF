@@ -11,11 +11,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Page Update="Auth\AuthView.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-  </ItemGroup>
-  
+
 </Project>
