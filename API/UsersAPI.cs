@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Windows.Controls;
 using Newtonsoft.Json.Linq;
+using SellBroCRMWPF.AES;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
@@ -48,11 +49,10 @@ namespace SellBroCRMWPF.API
             JObject obj = JObject.Parse(json);
             string token = (string) obj.SelectToken("data.authToken");
 
-            resp.Text = token;
-            
-            
-            MainWindow.Encrypt(token, Instance.MacAdress);
-            
+            //resp.Text = token;
+
+            token = AesOperation.EncryptString(Instance.MacAdress, token);
+            resp.Text = token; 
 
             FileStream stream = new FileStream(Instance.EnviromentPath + Instance.JwtFileName, FileMode.Create);
             stream.Close();

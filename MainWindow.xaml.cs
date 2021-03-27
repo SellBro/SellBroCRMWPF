@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Windows;
+using SellBroCRMWPF.AES;
 using SellBroCRMWPF.API;
 
 namespace SellBroCRMWPF
@@ -35,20 +36,10 @@ namespace SellBroCRMWPF
             {
                 StreamReader file = new StreamReader(jwtPath);
                 activeToken = file.ReadLine();
-                activeToken = Decrypt(activeToken, Instance.MacAdress);
+                activeToken = AesOperation.DecryptString(Instance.MacAdress, activeToken);
+                resp.Text = activeToken;
             }
         }
-        
-        public static string Encrypt(string text, string key)
-        {
-            return text;
-        }
-
-        public static string Decrypt(string encryptedText, string key)
-        {
-            return encryptedText;
-        }
-        
         
         private void Button_Click(object sender, RoutedEventArgs e)
         {
