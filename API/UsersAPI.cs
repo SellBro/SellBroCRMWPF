@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,14 +28,16 @@ namespace SellBroCRMWPF.API
             
             var res = response.Content.ReadAsStringAsync();
             
+            Debug.WriteLine(res.Result);
+            
             ParseToken(res.Result);
             // TODO: handle request
             return true;
         }
 
-        public static async Task<bool> RegisterPostRequest()
+        public static async Task<bool> RegisterPostRequest(string email, string password)
         {
-            RegisterUser registerUser = new RegisterUser{Email = "Pepe228@gmail.com", Password = "228"};
+            RegisterUser registerUser = new RegisterUser{Email = email, Password = password};
             
             string json = JsonSerializer.Serialize(registerUser);
             var data = new StringContent(json, Encoding.UTF8, Instance.MediaType);
@@ -43,6 +47,8 @@ namespace SellBroCRMWPF.API
             var response = await client.PostAsync(Instance.Register, data);
             
             var res = response.Content.ReadAsStringAsync();
+            
+            Debug.WriteLine(res.Result);
             
             ParseToken(res.Result);
             // TODO: handle request

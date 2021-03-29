@@ -13,7 +13,7 @@ namespace SellBroCRMWPF.Auth
 {
     public class AuthModel: INotifyPropertyChanged
     {
-        private AuthenticationUser _authUser;
+        private AuthenticationUser _authUser = new AuthenticationUser();
         private CurrentUser _currentUser;
         private Action _goToApp;
         
@@ -97,7 +97,7 @@ namespace SellBroCRMWPF.Auth
 
         private async void SignUp()
         {
-            bool result = await UsersAPI.RegisterPostRequest();
+            bool result = await UsersAPI.RegisterPostRequest(Email, Password);
             
             // remember me checkbox
             if (saveData)

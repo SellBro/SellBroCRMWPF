@@ -5,6 +5,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
 			 StartupUri="MainWindow.xaml">
 	<Application.Resources>
-		<SolidColorBrush x:Key="pepega" Color="#ffffff"/>
+		<SolidColorBrush x:Key="BackgroundPrimary" Color="#ffffff"/>
+        <SolidColorBrush x:Key="BackgroundSecondary" Color="#7700b4"/>
 	</Application.Resources>
 </Application>
