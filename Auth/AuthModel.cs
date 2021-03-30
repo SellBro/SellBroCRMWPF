@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using Prism.Commands;
-using SellBroCRMWPF.Annotations;
 using SellBroCRMWPF.API;
+using SellbroCRMWPF.Desktop;
+using SellBroCRMWPF.Desktop;
 
 namespace SellBroCRMWPF.Auth
 {
@@ -27,20 +27,20 @@ namespace SellBroCRMWPF.Auth
             _goToApp = goToApp;
             SignInCommand = new DelegateCommand(SignIn, ValidateFields);
             SignUpCommand = new DelegateCommand(SignUp);
-            Directory.CreateDirectory(Instance.EnviromentPath);
+            Directory.CreateDirectory(Variables.EnviromentPath);
             
-            Instance.MacAdress = (
+            Variables.MacAdress = (
                 from nic in NetworkInterface.GetAllNetworkInterfaces()
                 where nic.OperationalStatus == OperationalStatus.Up
                 select nic.GetPhysicalAddress().ToString()
             ).FirstOrDefault();
             
-            _currentUser = UsersAPI.LoadData();
+            _currentUser = ProcessData.LoadData();
             if (_currentUser.Email == "" || _currentUser.Password == "")
             {
                 // TODO: Handle no user data
             }
-            _currentUser.Token = UsersAPI.ValidateToken();
+            _currentUser.Token = ProcessToken.ValidateToken();
             if (_currentUser.Token == "")
             {
                 // TODO: Handle no token
@@ -89,7 +89,7 @@ namespace SellBroCRMWPF.Auth
             if (saveData)
             {
                 string[] dataToSave = {"Pepe@gamil.com", "322"};
-                UsersAPI.SaveData(dataToSave);
+                ProcessData.SaveData(dataToSave);
             }
             
             _goToApp.Invoke();
@@ -103,7 +103,7 @@ namespace SellBroCRMWPF.Auth
             if (saveData)
             {
                 string[] dataToSave = {"Pepe@gamil.com", "322"};
-                UsersAPI.SaveData(dataToSave);
+                ProcessData.SaveData(dataToSave);
             }
         }
 

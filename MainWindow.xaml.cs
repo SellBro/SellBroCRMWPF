@@ -2,8 +2,7 @@
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Windows;
-using SellBroCRMWPF.AES;
-using SellBroCRMWPF.API;
+using SellBroCRMWPF.Desktop;
 
 namespace SellBroCRMWPF
 {
@@ -16,9 +15,9 @@ namespace SellBroCRMWPF
         public MainWindow()
         {
             InitializeComponent();
-            Directory.CreateDirectory(Instance.EnviromentPath);
+            Directory.CreateDirectory(Variables.EnviromentPath);
             
-            Instance.MacAdress = (
+            Variables.MacAdress = (
                 from nic in NetworkInterface.GetAllNetworkInterfaces()
                 where nic.OperationalStatus == OperationalStatus.Up
                 select nic.GetPhysicalAddress().ToString()
