@@ -77,7 +77,7 @@ namespace SellBroCRMWPF.Auth
                     _authUser.Password = value;
                     OnPropertyChanged();
                     SignInCommand.RaiseCanExecuteChanged();
-                } 
+                }
             }
         }
 

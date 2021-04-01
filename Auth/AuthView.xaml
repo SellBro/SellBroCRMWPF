@@ -4,16 +4,44 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SellBroCRMWPF"
-             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="1200.833" d:DesignHeight="868.167">
-    <Grid Background="White">
+             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="1716"
+             d:DesignHeight="1020">
+    <Grid Name="MainFrame">
+        <Grid.Background>
+            <ImageBrush ImageSource="{StaticResource Mountains}" Stretch="UniformToFill" />
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.40*"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="{StaticResource BackgroundSecondary}">
-            <Grid.ColumnDefinitions>
-                
-            </Grid.ColumnDefinitions>
+        <Grid Background="{StaticResource BackgroundSecondary}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="147*"></RowDefinition>
+                <RowDefinition Height="260*"></RowDefinition>
+                <RowDefinition Height="204*"></RowDefinition>
+                <RowDefinition Height="204*"></RowDefinition>
+                <RowDefinition Height="204*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="{StaticResource Logo}" Margin="10" MaxHeight="100" MaxWidth="100"/>
+                    <TextBlock Grid.Column="1" Foreground="White"
+                               FontSize="64"
+                                   FontFamily="{StaticResource ProcrastinatingPixie}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center">
+                            SELLBRO CRM
+                    </TextBlock>
+                </Grid>
+            </Viewbox>
         </Grid>
+        <Rectangle Grid.Column="1">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{StaticResource Mountains}"></ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
     </Grid>
 </UserControl>

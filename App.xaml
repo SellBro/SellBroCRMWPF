@@ -5,7 +5,10 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
 			 StartupUri="MainWindow.xaml">
 	<Application.Resources>
-		<SolidColorBrush x:Key="BackgroundPrimary" Color="#ffffff"/>
+        <SolidColorBrush x:Key="BackgroundPrimary" Color="#ffffff"/>
         <SolidColorBrush x:Key="BackgroundSecondary" Color="#7700b4"/>
+		<FontFamily x:Key="ProcrastinatingPixie">pack://application:,,,/Fonts/#Procrastinating Pixie</FontFamily>
+		<ImageSource x:Key="Mountains">Images/mountains.png</ImageSource>
+		<ImageSource x:Key="Logo">Images/medved-icon.png</ImageSource>
 	</Application.Resources>
 </Application>

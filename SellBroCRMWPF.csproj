@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <RootNamespace>SellbroCRMWPF</RootNamespace>
+    <ApplicationIcon>Images\medved-colored-icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,20 @@
     <Page Update="Auth\AuthView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Resource Include="Fonts\Procrastinating_Pixie.ttf" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Images\mountains.png" />
+    <None Remove="Images\medved-icon.png" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Resource Include="Images\mountains.png" />
+    <Resource Include="Images\medved-icon.png" />
   </ItemGroup>
   
 </Project>
