@@ -12,9 +12,9 @@ namespace SellBroCRMWPF.API
 {
     public class UsersAPI
     {
-        public static async Task<bool> LoginPostRequest(AuthenticationUser user)
+        public static async Task<bool> LoginPostRequest()
         {
-            LoginUser loginUser = new LoginUser(user);
+            LoginUser loginUser = new LoginUser(AuthenticationUser.GetInstance());
             
             // TODO: extract this logic
             string json = JsonSerializer.Serialize(loginUser);

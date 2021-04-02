@@ -9,7 +9,6 @@ namespace SellbroCRMWPF.Desktop
 {
     public static class ProcessData
     {
-        
         public static void SaveData(string[] data)
         {
             FileStream stream = new FileStream(Variables.EnviromentPath + Variables.DataFileName, FileMode.Create);
@@ -25,21 +24,17 @@ namespace SellbroCRMWPF.Desktop
             sw.Close();
         }
         
-        public static AuthenticationUser LoadData()
+        public static void LoadData()
         {
-            AuthenticationUser userToLoadIn = new AuthenticationUser{Email = "", Password = ""};
-            
             string dataPath = Variables.EnviromentPath + Variables.DataFileName;
             
             if (File.Exists(dataPath))
             {
                 StreamReader file = new StreamReader(dataPath);
-                userToLoadIn.Email = AesOperation.DecryptString(Variables.MacAdress, file.ReadLine());
-                userToLoadIn.Password = AesOperation.DecryptString(Variables.MacAdress, file.ReadLine());
+                AuthenticationUser.GetInstance().Email = AesOperation.DecryptString(Variables.MacAdress, file.ReadLine());
+                AuthenticationUser.GetInstance().Password = AesOperation.DecryptString(Variables.MacAdress, file.ReadLine());
                 file.Close();
             }
-
-            return userToLoadIn;
         }    
     }
 }

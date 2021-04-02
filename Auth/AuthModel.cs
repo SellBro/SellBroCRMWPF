@@ -1,11 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using Prism.Commands;
 using SellBroCRMWPF.API;
 using SellbroCRMWPF.Desktop;
@@ -15,36 +11,22 @@ namespace SellBroCRMWPF.Auth
 {
     public class AuthModel: INotifyPropertyChanged
     {
-        private AuthenticationUser _authUser = new AuthenticationUser();
-        private Action _goToApp;
+        private static Action _goToApp;
         
         private bool saveData = true;
         
         public DelegateCommand SignInCommand { get; }
         public DelegateCommand SignUpCommand { get; }
 
-        public AuthModel(Action goToApp)
+        public AuthModel(Action goToApp, bool loadUI = true)
         {
             _goToApp = goToApp;
-            SignInCommand = new DelegateCommand(SignIn, ValidateFields);
-            SignUpCommand = new DelegateCommand(SignUp);
-            Directory.CreateDirectory(Variables.EnviromentPath);
-            
-            Variables.MacAdress = (
-                from nic in NetworkInterface.GetAllNetworkInterfaces()
-                where nic.OperationalStatus == OperationalStatus.Up
-                select nic.GetPhysicalAddress().ToString()
-            ).FirstOrDefault();
-            
-            _authUser = ProcessData.LoadData();
-            if (_authUser.Email != "" || _authUser.Password != "")
+
+            if (loadUI)
             {
-                SignIn();
-            }
-            _authUser.Token = ProcessToken.ValidateToken();
-            if (_authUser.Token == "")
-            {
-                // TODO: Handle no token
+                SignInCommand = new DelegateCommand(SignIn, ValidateFields);
+                SignUpCommand = new DelegateCommand(SignUp);
+                Directory.CreateDirectory(Variables.EnviromentPath);
             }
         }
 
@@ -52,13 +34,13 @@ namespace SellBroCRMWPF.Auth
         {
             get
             {
-                return _authUser.Email;
+                return AuthenticationUser.GetInstance().Email;
             }
             set
             {
-                if (_authUser.Email != value)
+                if (AuthenticationUser.GetInstance().Email != value)
                 {
-                    _authUser.Email = value;
+                    AuthenticationUser.GetInstance().Email = value;
                     OnPropertyChanged();
                     SignInCommand.RaiseCanExecuteChanged();
                 }
@@ -69,40 +51,41 @@ namespace SellBroCRMWPF.Auth
         {
             get
             {
-                return _authUser.Password;
+                return AuthenticationUser.GetInstance().Password;
             }
             set
             {
-                if (_authUser.Password != value)
+                if (AuthenticationUser.GetInstance().Password != value)
                 {
-                    _authUser.Password = value;
+                    AuthenticationUser.GetInstance().Password = value;
                     OnPropertyChanged();
                     SignInCommand.RaiseCanExecuteChanged();
                 }
             }
         }
 
-        public bool RememberMe
+        public static bool RememberMe
         {
             get
             {
-                return _authUser.RememberMe;
+                return AuthenticationUser.GetInstance().RememberMe;
             }
             set
             {
-                _authUser.RememberMe = !_authUser.RememberMe;
+                
+                AuthenticationUser.GetInstance().RememberMe = !AuthenticationUser.GetInstance().RememberMe;
             }
         }
 
-        private async void SignIn()
+        public static async void SignIn()
         {
-            bool result = await UsersAPI.LoginPostRequest(_authUser);
+            bool result = await UsersAPI.LoginPostRequest();
 
             if (result)
             {
                 if (RememberMe)
                 {
-                    string[] dataToSave = _authUser.SaveUser();
+                    string[] dataToSave = AuthenticationUser.GetInstance().SaveUser();
                     ProcessData.SaveData(dataToSave);
                 }
 
@@ -119,7 +102,7 @@ namespace SellBroCRMWPF.Auth
             {
                 if (RememberMe)
                 {
-                    string[] dataToSave = _authUser.SaveUser();
+                    string[] dataToSave = AuthenticationUser.GetInstance().SaveUser();
                     ProcessData.SaveData(dataToSave);
                 }
                 
