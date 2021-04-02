@@ -14,6 +14,7 @@ namespace SellBroCRMWPF.API
         {
             LoginUser loginUser = new LoginUser{Email = "Pepe228@gmail.com", Password = "228"};
             
+            // TODO: extract this logic
             string json = JsonSerializer.Serialize(loginUser);
             var data = new StringContent(json, Encoding.UTF8, Instance.MediaType);
 
@@ -34,6 +35,7 @@ namespace SellBroCRMWPF.API
         {
             RegisterUser registerUser = new RegisterUser{Email = email, Password = password};
             
+            // TODO: extract this logic
             string json = JsonSerializer.Serialize(registerUser);
             var data = new StringContent(json, Encoding.UTF8, Instance.MediaType);
             
