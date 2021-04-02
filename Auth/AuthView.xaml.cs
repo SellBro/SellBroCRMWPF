@@ -16,7 +16,7 @@ namespace SellBroCRMWPF.Auth
 
         private void PbPassword_OnPasswordChanged(object sender, RoutedEventArgs e)
         {
-            // _authModel.Password = PbPassword.Password;
+            _authModel.Password = PbPassword.Password;
         }
     }
 }

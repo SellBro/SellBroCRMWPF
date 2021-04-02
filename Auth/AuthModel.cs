@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using Prism.Commands;
 using SellBroCRMWPF.API;
 using SellbroCRMWPF.Desktop;
@@ -81,12 +83,23 @@ namespace SellBroCRMWPF.Auth
             }
         }
 
+        public bool RememberMe
+        {
+            get
+            {
+                return _authUser.RememberMe;
+            }
+            set
+            {
+                _authUser.RememberMe = !_authUser.RememberMe;
+            }
+        }
+
         private async void SignIn()
         {
             bool result = await UsersAPI.LoginPostRequest();
             
-            // remember me checkbox
-            if (saveData)
+            if (RememberMe)
             {
                 string[] dataToSave = {"Pepe@gamil.com", "322"};
                 ProcessData.SaveData(dataToSave);
@@ -99,8 +112,7 @@ namespace SellBroCRMWPF.Auth
         {
             bool result = await UsersAPI.RegisterPostRequest(Email, Password);
             
-            // remember me checkbox
-            if (saveData)
+            if (RememberMe)
             {
                 string[] dataToSave = {"Pepe@gamil.com", "322"};
                 ProcessData.SaveData(dataToSave);
