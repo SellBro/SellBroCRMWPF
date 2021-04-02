@@ -16,7 +16,6 @@ namespace SellBroCRMWPF.Auth
     public class AuthModel: INotifyPropertyChanged
     {
         private AuthenticationUser _authUser = new AuthenticationUser();
-        private CurrentUser _currentUser;
         private Action _goToApp;
         
         private bool saveData = true;
@@ -37,13 +36,13 @@ namespace SellBroCRMWPF.Auth
                 select nic.GetPhysicalAddress().ToString()
             ).FirstOrDefault();
             
-            _currentUser = ProcessData.LoadData();
-            if (_currentUser.Email == "" || _currentUser.Password == "")
+            _authUser = ProcessData.LoadData();
+            if (_authUser.Email != "" || _authUser.Password != "")
             {
-                // TODO: Handle no user data
+                SignIn();
             }
-            _currentUser.Token = ProcessToken.ValidateToken();
-            if (_currentUser.Token == "")
+            _authUser.Token = ProcessToken.ValidateToken();
+            if (_authUser.Token == "")
             {
                 // TODO: Handle no token
             }
@@ -97,26 +96,35 @@ namespace SellBroCRMWPF.Auth
 
         private async void SignIn()
         {
-            bool result = await UsersAPI.LoginPostRequest();
-            
-            if (RememberMe)
+            bool result = await UsersAPI.LoginPostRequest(_authUser);
+
+            if (result)
             {
-                string[] dataToSave = {"Pepe@gamil.com", "322"};
-                ProcessData.SaveData(dataToSave);
+                if (RememberMe)
+                {
+                    string[] dataToSave = _authUser.SaveUser();
+                    ProcessData.SaveData(dataToSave);
+                }
+
+                _goToApp.Invoke();
             }
             
-            _goToApp.Invoke();
         }
 
         private async void SignUp()
         {
             bool result = await UsersAPI.RegisterPostRequest(Email, Password);
-            
-            if (RememberMe)
+
+            if (result)
             {
-                string[] dataToSave = {"Pepe@gamil.com", "322"};
-                ProcessData.SaveData(dataToSave);
-            }
+                if (RememberMe)
+                {
+                    string[] dataToSave = _authUser.SaveUser();
+                    ProcessData.SaveData(dataToSave);
+                }
+                
+                _goToApp.Invoke();
+            } 
         }
 
         private bool ValidateFields()

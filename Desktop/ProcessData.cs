@@ -2,6 +2,7 @@
 using System.Text;
 using SellBroCRMWPF;
 using SellBroCRMWPF.AES;
+using SellBroCRMWPF.Auth;
 using SellBroCRMWPF.Desktop;
 
 namespace SellbroCRMWPF.Desktop
@@ -24,9 +25,9 @@ namespace SellbroCRMWPF.Desktop
             sw.Close();
         }
         
-        public static CurrentUser LoadData()
+        public static AuthenticationUser LoadData()
         {
-            CurrentUser userToLoadIn = new CurrentUser {Email = "", Password = ""};
+            AuthenticationUser userToLoadIn = new AuthenticationUser{Email = "", Password = ""};
             
             string dataPath = Variables.EnviromentPath + Variables.DataFileName;
             
