@@ -27,11 +27,13 @@
   <ItemGroup>
     <None Remove="Images\mountains.png" />
     <None Remove="Images\medved-icon.png" />
+    <None Remove="Images\github-icon.png" />
   </ItemGroup>
   
   <ItemGroup>
     <Resource Include="Images\mountains.png" />
     <Resource Include="Images\medved-icon.png" />
+    <Resource Include="Images\github-icon.png" />
   </ItemGroup>
   
 </Project>

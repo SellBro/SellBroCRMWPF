@@ -7,8 +7,25 @@
 	<Application.Resources>
         <SolidColorBrush x:Key="BackgroundPrimary" Color="#ffffff"/>
         <SolidColorBrush x:Key="BackgroundSecondary" Color="#7700b4"/>
-		<FontFamily x:Key="ProcrastinatingPixie">pack://application:,,,/Fonts/#Procrastinating Pixie</FontFamily>
+        <SolidColorBrush x:Key="BackgroundPink" Color="#ce50f2"/>
+        <FontFamily x:Key="ProcrastinatingPixie">pack://application:,,,/Fonts/#Procrastinating Pixie</FontFamily>
 		<ImageSource x:Key="Mountains">Images/mountains.png</ImageSource>
 		<ImageSource x:Key="Logo">Images/medved-icon.png</ImageSource>
-	</Application.Resources>
+        <ImageSource x:Key="Github">Images/github-icon.png</ImageSource>
+        <Style TargetType="Border" x:Key="RoundMe">
+            <Setter Property="CornerRadius" Value="360"/>
+        </Style>
+        <Style x:Key="NoHover" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
 </Application>
