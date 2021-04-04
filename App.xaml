@@ -9,6 +9,8 @@
         <SolidColorBrush x:Key="BackgroundSecondary" Color="#7700b4"/>
         <SolidColorBrush x:Key="BackgroundPink" Color="#ce50f2"/>
         <FontFamily x:Key="ProcrastinatingPixie">pack://application:,,,/Fonts/#Procrastinating Pixie</FontFamily>
+        <FontFamily x:Key="MontserratRegular">pack://application:,,,/Fonts/#Montserrat</FontFamily>
+        <FontFamily x:Key="MontserratBold">pack://application:,,,/Fonts/#Montserrat</FontFamily>
 		<ImageSource x:Key="Mountains">Images/mountains.png</ImageSource>
 		<ImageSource x:Key="Logo">Images/medved-icon.png</ImageSource>
         <ImageSource x:Key="Github">Images/github-icon.png</ImageSource>
