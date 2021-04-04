@@ -17,6 +17,7 @@ namespace SellBroCRMWPF.Auth
         
         public DelegateCommand SignInCommand { get; }
         public DelegateCommand SignUpCommand { get; }
+        public DelegateCommand TrueJSON { get; }
 
         public AuthModel(Action goToApp, bool loadUI = true)
         {
@@ -26,6 +27,7 @@ namespace SellBroCRMWPF.Auth
             {
                 SignInCommand = new DelegateCommand(SignIn, ValidateFields);
                 SignUpCommand = new DelegateCommand(SignUp);
+                TrueJSON = new DelegateCommand(ShowTrueJSON);
                 Directory.CreateDirectory(Variables.EnviromentPath);
             }
         }
@@ -113,6 +115,15 @@ namespace SellBroCRMWPF.Auth
         private bool ValidateFields()
         {
             return !String.IsNullOrWhiteSpace(Email) && !String.IsNullOrWhiteSpace(Password);
+        }
+
+        private void ShowTrueJSON()
+        {
+            var uri = Instance.TrueJson;
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = uri;
+            System.Diagnostics.Process.Start(psi);
         }
         
         public event PropertyChangedEventHandler PropertyChanged;
