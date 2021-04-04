@@ -24,6 +24,8 @@ namespace SellBroCRMWPF.API
             
             var response = await client.PostAsync(Instance.Login, data);
             
+            if (!response.IsSuccessStatusCode) return false;
+            
             var res = response.Content.ReadAsStringAsync();
 
             if (!res.IsCompleted)
@@ -48,17 +50,15 @@ namespace SellBroCRMWPF.API
             using var client = new HttpClient();
             
             var response = await client.PostAsync(Instance.Register, data);
+
+            if (!response.IsSuccessStatusCode) return false;
             
             var res = response.Content.ReadAsStringAsync();
             
-            if (!res.IsCompleted)
-            {
-                throw new Exception("Register Result exception");
-            } 
             Debug.WriteLine(res.Result);
             
             ProcessToken.ParseToken(res.Result);
-            // TODO: handle request
+            
             return true;
         }
         

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using Prism.Commands;
 using SellBroCRMWPF.API;
 using SellbroCRMWPF.Desktop;
@@ -93,6 +94,15 @@ namespace SellBroCRMWPF.Auth
 
                 _goToApp.Invoke();
             }
+            else
+            {
+                string caption = "Login Error";
+                string text = "Login Error. Invalid Email or Password";
+                MessageBoxImage icon = MessageBoxImage.Error;
+                MessageBoxButton button = MessageBoxButton.OK;
+
+                MessageBox.Show(text, caption, button, icon);
+            } 
             
         }
 
@@ -109,7 +119,16 @@ namespace SellBroCRMWPF.Auth
                 }
                 
                 _goToApp.Invoke();
-            } 
+            }
+            else
+            {
+                string caption = "Register Error";
+                string text = "Register Error. Invalid Email or Password";
+                MessageBoxImage icon = MessageBoxImage.Error;
+                MessageBoxButton button = MessageBoxButton.OK;
+
+                MessageBox.Show(text, caption, button, icon);
+            }
         }
 
         private bool ValidateFields()
