@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SellBroCRMWPF.Auth;
 using SellBroCRMWPF.Desktop;
 using JsonConverter = System.Text.Json.Serialization.JsonConverter;
@@ -47,7 +48,7 @@ namespace SellBroCRMWPF.API
             dynamic parsedTable = JsonConvert.DeserializeObject(json);
 
             table.Id = parsedTable["data"]["table"]["id"];
-            table.userId = parsedTable["data"]["table"]["userId"];
+            table.UserId = parsedTable["data"]["table"]["userId"];
 
             var fields = parsedTable["data"]["table"]["fieldNames"];
 
@@ -56,9 +57,19 @@ namespace SellBroCRMWPF.API
                 Field field = new Field();
                 field.Id = f["id"];
                 field.Type = f["type"];
-                field.fieldType = f["fieldValues"];
+
+                var items = f["fieldValues"];
+
+                foreach (var i in items)
+                {
+                    Item item = new Item();
+                    item.Id = i["id"];
+                    item.Value = i["value"];
+                    
+                    field.Items.Add(item);
+                }
                 
-                table.fields.Add(field);
+                table.Fields.Add(field);
             }
 
             return table;

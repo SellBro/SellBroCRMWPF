@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SellBroCRMWPF
 {
@@ -9,12 +10,23 @@ namespace SellBroCRMWPF
         [JsonPropertyName("type")]
         public string Type { get; set; }
         [JsonPropertyName("fieldValues")] 
-        public dynamic fieldType { get; set; }
+        public List<Item> Items { get; set; }
 
+        public Field()
+        {
+            Items = new List<Item>();
+        }
+        
         public override string ToString()
         {
             string res = "";
-            res += Type + " " + fieldType + ";";
+            res += Type;
+            
+            foreach (Item item in Items)
+            {
+                res += "\nItem - " + item.ToString();
+            }
+            
             return res;
         }
     }

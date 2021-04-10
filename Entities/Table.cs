@@ -8,13 +8,13 @@ namespace SellBroCRMWPF
         [JsonPropertyName("id")]
         public int Id { get; set; }
         [JsonPropertyName("userId")]
-        public int userId { get; set; }
+        public int UserId { get; set; }
         [JsonPropertyName("fieldNames")] 
-        public List<Field> fields { get; set; }
+        public List<Field> Fields { get; set; }
 
         public Table()
         {
-            fields = new List<Field>();
+            Fields = new List<Field>();
         }
         
         public override string ToString()
@@ -22,9 +22,9 @@ namespace SellBroCRMWPF
             string res = "";
 
             res += "Id - " + Id;
-            res += "\nUserId - " + userId;
+            res += "\nUserId - " + UserId;
 
-            foreach (Field item in fields)
+            foreach (Field item in Fields)
             {
                 res += "\nItem - " + item.ToString();
             }
