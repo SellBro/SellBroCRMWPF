@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Text;
-using SellBroCRMWPF;
 using SellBroCRMWPF.AES;
 using SellBroCRMWPF.Auth;
 using SellBroCRMWPF.Desktop;

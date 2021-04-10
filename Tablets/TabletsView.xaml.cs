@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using Newtonsoft.Json;
 using SellBroCRMWPF.API;
-using SellBroCRMWPF.Desktop;
 
 namespace SellBroCRMWPF.Tablets
 {
@@ -24,6 +18,9 @@ namespace SellBroCRMWPF.Tablets
         private async void GetTableData(int tableNum = 1)
         {
             Table t = await TablesAPI.RequestTable();
+            
+            //TODO: Use table date in the table
+            
             MessageBox.Show(t.ToString());
         }
 

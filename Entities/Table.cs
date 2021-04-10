@@ -26,7 +26,7 @@ namespace SellBroCRMWPF
 
             foreach (Field item in Fields)
             {
-                res += "\nItem - " + item.ToString();
+                res += "\nField - " + item.ToString();
             }
 
             return res;

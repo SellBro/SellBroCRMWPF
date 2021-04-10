@@ -2,14 +2,9 @@
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SellBroCRMWPF.Auth;
-using SellBroCRMWPF.Desktop;
-using JsonConverter = System.Text.Json.Serialization.JsonConverter;
 
 namespace SellBroCRMWPF.API
 {
@@ -23,10 +18,10 @@ namespace SellBroCRMWPF.API
 
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            MessageBox.Show(AuthenticationUser.GetInstance().Token);
             client.DefaultRequestHeaders.Add("Authorization", AuthenticationUser.GetInstance().Token);
-            var response = await client.GetAsync("https://sellbro-crm-api.herokuapp.com/tables/1");
+            var response = await client.GetAsync(Instance.GetTable + id);
             
+            // TODO: Handle fail state
             //if (!response.IsSuccessStatusCode) return false;
             
             var res = response.Content.ReadAsStringAsync();
@@ -37,10 +32,10 @@ namespace SellBroCRMWPF.API
             }
             Debug.WriteLine(res.Result);
 
-            MessageBox.Show(res.Result);
-
             return ParseTable(res.Result);
         }
+        
+        // TODO: Get All Tables
 
         private static Table ParseTable(string json)
         {
