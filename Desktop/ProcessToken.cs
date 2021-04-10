@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows;
 using Newtonsoft.Json.Linq;
 using SellBroCRMWPF.AES;
+using SellBroCRMWPF.API;
 using SellBroCRMWPF.Auth;
 
 namespace SellBroCRMWPF.Desktop
@@ -16,6 +17,7 @@ namespace SellBroCRMWPF.Desktop
 
             // Save token to current user
             AuthenticationUser.GetInstance().Token = token;
+            Client.SetToken();
 
             token = AesOperation.EncryptString(Variables.MacAdress, token);
 

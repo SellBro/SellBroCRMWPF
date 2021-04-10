@@ -20,9 +20,7 @@ namespace SellBroCRMWPF.API
             string json = JsonSerializer.Serialize(loginUser);
             var data = new StringContent(json, Encoding.UTF8, Instance.MediaType);
 
-            using var client = new HttpClient();
-            
-            var response = await client.PostAsync(Instance.Login, data);
+            var response = await Client.GetInstance().PostAsync(Instance.Login, data);
             
             if (!response.IsSuccessStatusCode) return false;
             
@@ -47,9 +45,7 @@ namespace SellBroCRMWPF.API
             string json = JsonSerializer.Serialize(registerUser);
             var data = new StringContent(json, Encoding.UTF8, Instance.MediaType);
             
-            using var client = new HttpClient();
-            
-            var response = await client.PostAsync(Instance.Register, data);
+            var response = await Client.GetInstance().PostAsync(Instance.Register, data);
 
             if (!response.IsSuccessStatusCode) return false;
 

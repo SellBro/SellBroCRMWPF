@@ -1,13 +1,10 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
-using SellBroCRMWPF.Auth;
 
 namespace SellBroCRMWPF.API
 {
@@ -19,10 +16,7 @@ namespace SellBroCRMWPF.API
             
             Debug.WriteLine("Request");
 
-            using var client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(Instance.MediaType));
-            client.DefaultRequestHeaders.Add("Authorization", AuthenticationUser.GetInstance().Token);
-            var response = await client.GetAsync(Instance.GetTable + "/" + id);
+            var response = await Client.GetInstance().GetAsync(Instance.GetTable + "/" + id);
             
             // TODO: Handle fail state
             if (!response.IsSuccessStatusCode) return null;
@@ -40,9 +34,7 @@ namespace SellBroCRMWPF.API
             string body = JsonSerializer.Serialize(t);
             var tableName = new StringContent(body, Encoding.UTF8, Instance.MediaType);
             
-            using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", AuthenticationUser.GetInstance().Token);
-            var response = await client.PostAsync(Instance.GetTable, tableName);
+            var response = await Client.GetInstance().PostAsync(Instance.GetTable, tableName);
             
             // TODO: Handle fail state
             if (!response.IsSuccessStatusCode) return null;
