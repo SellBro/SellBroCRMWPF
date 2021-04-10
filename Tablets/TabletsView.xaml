@@ -76,7 +76,7 @@
                     </StackPanel>
                 </materialDesign:PopupBox>
             </StackPanel>
-            <TextBlock HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center" FontFamily="{StaticResource MontserratBold}" FontSize="22">Design com WPF</TextBlock>
+            <TextBox materialDesign:HintAssist.Hint="{materialDesign:PackIcon Kind=Search}" ToolTip="Icon" Padding="100,3" Background="{StaticResource BackgroundPink}" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center" FontFamily="{StaticResource MontserratBold}" FontSize="22"/>
         </Grid>
         <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="{StaticResource BackgroundLightPink}">
             <Grid.Effect>
