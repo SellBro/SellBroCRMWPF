@@ -52,14 +52,8 @@ namespace SellBroCRMWPF.API
             var response = await client.PostAsync(Instance.Register, data);
 
             if (!response.IsSuccessStatusCode) return false;
-            
-            var res = response.Content.ReadAsStringAsync();
-            
-            Debug.WriteLine(res.Result);
-            
-            ProcessToken.ParseToken(res.Result);
-            
-            return true;
+
+            return await LoginPostRequest();
         }
         
         

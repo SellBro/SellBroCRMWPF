@@ -18,9 +18,11 @@ namespace SellBroCRMWPF.Tablets
         private async void GetTableData(int tableNum = 1)
         {
             Table t = await TablesAPI.RequestTable();
-            
             //TODO: Use table date in the table
-            
+            if (t == null)
+            {
+                t = await TablesAPI.CreateTable();
+            } 
             MessageBox.Show(t.ToString());
         }
 

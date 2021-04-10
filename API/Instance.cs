@@ -8,7 +8,7 @@
         private static string login = $"{baseURL}/login";
         private static string register = $"{baseURL}/register";
         private static string trueJSON = $"{baseURL}/truejson/truejson.jpg";
-        private static string getTable = $"{baseURL}/tables/";
+        private static string getTable = $"{baseURL}/tables";
 
         public static string MediaType => mediaType;
         

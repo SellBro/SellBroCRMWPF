@@ -14,7 +14,7 @@ namespace SellBroCRMWPF
         {
             InitializeComponent();
 
-            if (LoadUserData()) return;
+            // if (LoadUserData()) return;
 
             Content = new AuthView(GoToApp);
         }
