@@ -14,7 +14,7 @@ namespace SellBroCRMWPF
         {
             InitializeComponent();
 
-            // if (LoadUserData()) return;
+            if (LoadUserData()) return;
 
             Content = new AuthView(GoToApp);
         }
@@ -26,6 +26,9 @@ namespace SellBroCRMWPF
             UpdateMacAddress();
             
             ProcessData.LoadData();
+            
+            AuthenticationUser.GetInstance().UpdateToken();
+            
             if (AuthenticationUser.GetInstance().IsDataValid())
             {
                 // Creating AuthView to initialize AuthModel _goToApp action

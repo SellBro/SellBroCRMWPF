@@ -1,13 +1,30 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Text;
+using System.Windows;
 using System.Windows.Controls;
+using Newtonsoft.Json;
+using SellBroCRMWPF.API;
+using SellBroCRMWPF.Desktop;
 
 namespace SellBroCRMWPF.Tablets
 {
     public partial class TabletsView : UserControl
     {
+        private List<Table> _tables = new List<Table>();
         public TabletsView()
         {
             InitializeComponent();
+            
+            GetTableData();
+        }
+
+        private async void GetTableData(int tableNum = 1)
+        {
+            Table t = await TablesAPI.RequestTable();
+            MessageBox.Show(t.ToString());
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)

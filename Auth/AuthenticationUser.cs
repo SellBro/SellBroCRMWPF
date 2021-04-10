@@ -1,4 +1,5 @@
 ﻿using System;
+using SellBroCRMWPF.API;
 
 namespace SellBroCRMWPF.Auth
 {
@@ -28,6 +29,11 @@ namespace SellBroCRMWPF.Auth
         public bool IsTokenValid()
         {
             return !String.IsNullOrEmpty(Token);
+        }
+
+        public async void UpdateToken()
+        {
+            await UsersAPI.LoginPostRequest();
         }
         
         public string[] SaveUser()
