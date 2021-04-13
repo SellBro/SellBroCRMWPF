@@ -28,8 +28,10 @@ namespace SellBroCRMWPF.API
 
         public static void SetToken()
         {
-            _client.DefaultRequestHeaders.Add("Authorization", AuthenticationUser.GetInstance().Token);
+            if (!_client.DefaultRequestHeaders.Contains("Authorization"))
+            {
+                _client.DefaultRequestHeaders.Add("Authorization", AuthenticationUser.GetInstance().Token);
+            }
         }
-        
     }
 }
