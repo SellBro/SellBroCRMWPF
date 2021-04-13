@@ -2,17 +2,26 @@
 using System.Windows;
 using System.Windows.Controls;
 using SellBroCRMWPF.API;
+using SellBroCRMWPF.Auth;
 
 namespace SellBroCRMWPF.Tablets
 {
     public partial class TabletsView : UserControl
     {
-        private List<Table> _tables = new List<Table>();
+        
         public TabletsView()
         {
             InitializeComponent();
-            
+
+            GetAllTables();
+
             GetTableData();
+            
+        }
+
+        private async void GetAllTables()
+        {
+            await TablesAPI.RequestAllTables();
         }
 
         private async void GetTableData(int tableNum = 1)
@@ -20,7 +29,7 @@ namespace SellBroCRMWPF.Tablets
             // If no tables - create
             Table t = await TablesAPI.RequestTable() ?? await TablesAPI.CreateTable();
             //TODO: Use table date in the table
-            MessageBox.Show(t.ToString());
+            // MessageBox.Show(t.ToString());
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)

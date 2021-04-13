@@ -4,18 +4,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
+using SellBroCRMWPF.Auth;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SellBroCRMWPF.API
 {
     public class TablesAPI
     {
+        public static async Task<bool> RequestAllTables()
+        {
+            var responce = await Client.GetInstance().GetAsync(Instance.GetTable);
+
+            if (!responce.IsSuccessStatusCode) return false;
+
+            var res = responce.Content.ReadAsStringAsync();
+            
+            await ParseAllTables(res.Result);
+
+            return true;
+        }
+        
         public static async Task<Table> RequestTable(int id = 1)
         {
-            Table table = new Table();
-            
-            Debug.WriteLine("Request");
-
             var response = await Client.GetInstance().GetAsync(Instance.GetTable + "/" + id);
             
             // TODO: Handle fail state
@@ -23,8 +33,8 @@ namespace SellBroCRMWPF.API
             
             var res = response.Content.ReadAsStringAsync();
 
-            
             return ParseTable(res.Result);
+            
         }
 
         public static async Task<Table> CreateTable(string name = "Table")
@@ -41,21 +51,35 @@ namespace SellBroCRMWPF.API
             
             var res = response.Content.ReadAsStringAsync();
 
-            MessageBox.Show(res.Result);
-            
             return ParseTable(res.Result); 
         }
-        
-        // TODO: Get All Tables
+
+        private static Task ParseAllTables(string json)
+        {
+            dynamic parsedTables = JsonConvert.DeserializeObject(json);
+
+            var tables = parsedTables["data"]["tables"];
+
+            foreach (var table in tables)
+            {
+                Table t = new Table();
+                t.Id = table["id"];
+                t.Name = table["name"];
+                t.UserId = table["userId"];
+                AuthenticationUser.GetInstance().Tables.Add(t);
+            }
+
+            return Task.CompletedTask;
+        }
 
         private static Table ParseTable(string json)
         {
-            Table table = new Table();
             dynamic parsedTable = JsonConvert.DeserializeObject(json);
 
-            table.Id = parsedTable["data"]["table"]["id"];
-            table.UserId = parsedTable["data"]["table"]["userId"];
-
+            int id = parsedTable["data"]["table"]["id"];
+            
+            Table table = AuthenticationUser.GetInstance().Tables.Find(x => x.Id == id);
+            
             var fields = parsedTable["data"]["table"]["fieldNames"];
 
             foreach (var f in fields)

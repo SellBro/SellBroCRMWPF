@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SellBroCRMWPF.API;
 
 namespace SellBroCRMWPF.Auth
@@ -10,6 +11,8 @@ namespace SellBroCRMWPF.Auth
         public string Password { get; set; }
         public string Token { get; set; }
         public bool RememberMe { get; set; }
+        
+        public List<Table> Tables = new List<Table>();
 
         public static AuthenticationUser GetInstance()
         {
