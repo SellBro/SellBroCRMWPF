@@ -87,7 +87,8 @@ namespace SellBroCRMWPF.API
                 Field field = new Field();
                 field.Id = f["id"];
                 field.Type = f["type"];
-
+                field.Name = f["name"];
+                
                 var items = f["fieldValues"];
 
                 foreach (var i in items)
@@ -95,6 +96,7 @@ namespace SellBroCRMWPF.API
                     Item item = new Item();
                     item.Id = i["id"];
                     item.Value = i["value"];
+                    item.FieldNameId = i["fieldNameId"];
                     
                     field.Items.Add(item);
                 }

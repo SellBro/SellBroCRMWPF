@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using SellBroCRMWPF.Auth;
 using SellbroCRMWPF.Desktop;
 using SellBroCRMWPF.Desktop;
-using SellBroCRMWPF.Tablets;
+using SellbroCRMWPF.Tables;
 
 namespace SellBroCRMWPF
 {
@@ -14,7 +14,7 @@ namespace SellBroCRMWPF
         {
             InitializeComponent();
 
-            // if (LoadUserData()) return;
+            if (LoadUserData()) return;
 
             Content = new AuthView(GoToApp);
         }

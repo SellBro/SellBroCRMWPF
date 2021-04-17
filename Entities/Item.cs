@@ -4,6 +4,9 @@ namespace SellBroCRMWPF
 {
     public class Item
     {
+        [JsonPropertyName("fieldNameId")] 
+        public int FieldNameId { get; set; }
+
         [JsonPropertyName("id")]
         public int Id { get; set; }
         [JsonPropertyName("value")]
