@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:SellbroCRMWPF.Tables"
              mc:Ignorable="d"
              d:DesignWidth="1716"
              d:DesignHeight="1020">
@@ -66,13 +67,12 @@
                 <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto"
       ScrollViewer.HorizontalScrollBarVisibility="Auto"
-      BeginningEdit="OnContentChanged"
-      CellEditEnding="OnContentChanged"
-      RowEditEnding="OnContentChanged"
-      IsReadOnly="False">
+      >
                     <DataGrid.Columns>
                     </DataGrid.Columns>
                 </DataGrid>
+                
+                <local:GridView Margin="0,60,0,0"></local:GridView>
             </Grid>
         </Grid>
         <Grid Height="60" VerticalAlignment="Top" Background="#7700b4">
