@@ -184,7 +184,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0">
-                        <Label Content="Lorem ipsum" FontSize="32" FontFamily="{StaticResource MontserratBold}" FontWeight="Bold"
+                        <Label Content="SellBro Studio" FontSize="32" FontFamily="{StaticResource MontserratBold}" FontWeight="Bold"
                                Foreground="{StaticResource BackgroundSecondary}" HorizontalAlignment="Left" />
                         <Label Height="5" Width="70" Margin="8,0,0,0" HorizontalAlignment="Left"
                                Background="{StaticResource BackgroundSecondary}" />
@@ -193,7 +193,7 @@
                         <TextBlock Margin="8,0,0,0" Padding="0,5,0,0" MaxWidth="700" LineHeight="30" Grid.Row="1"
                                    HorizontalAlignment="Left" FontSize="16" FontFamily="{StaticResource MontserratBold}" TextWrapping="Wrap"
                                    Opacity="0.3">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            SellBro is a small yet progressive dev studio founded in Ukraine. Originally named "SellBro Game Studios" and had 3 members in it. Surzhenko "SVell" Viacheslav, Ostap "OffBro" Nezenskiy and Vlad "Yell" Lukashenko. Years passed and from the original founders only SVell continued working on different game titles and technologies. In Year 2020 SellBro gained a new blood Maxim "YoungRake" Kuchynskyj - a talented frontend developer who is working on Front- and Backends of our projects. The studio was renamed to "SellBro Studio" and it is looking forward for new challenges and projects.
                         </TextBlock>
                         <Button materialDesign:ButtonAssist.CornerRadius="15" Content="More" Margin="8,30,0,0" Padding="25,7" HorizontalAlignment="Left"
                                 BorderThickness="0" Background="{StaticResource BackgroundPink}" Foreground="White"
