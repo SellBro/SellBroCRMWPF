@@ -10,6 +10,8 @@
         private static string trueJSON = $"{baseURL}truejson/truejson.jpg";
         private static string getTable = $"{baseURL}tables";
 
+        private static string githubLink = "https://github.com/SellBro";
+
         public static string MediaType => mediaType;
         
         public static string BaseUrl => baseURL;
@@ -17,7 +19,7 @@
         public static string Register => register;
 
         public static string TrueJson => trueJSON;
-
+        public static string GithubLink => githubLink;
         public static string GetTable => getTable;
     }
 }

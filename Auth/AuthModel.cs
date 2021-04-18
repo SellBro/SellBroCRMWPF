@@ -19,6 +19,7 @@ namespace SellBroCRMWPF.Auth
         public DelegateCommand SignInCommand { get; }
         public DelegateCommand SignUpCommand { get; }
         public DelegateCommand TrueJSON { get; }
+        public DelegateCommand GoToGithub { get; }
 
         public AuthModel(Action goToApp, bool loadUI = true)
         {
@@ -29,6 +30,7 @@ namespace SellBroCRMWPF.Auth
                 SignInCommand = new DelegateCommand(SignIn, ValidateFields);
                 SignUpCommand = new DelegateCommand(SignUp);
                 TrueJSON = new DelegateCommand(ShowTrueJSON);
+                GoToGithub = new DelegateCommand(RedirectToGithub);
                 Directory.CreateDirectory(Variables.EnviromentPath);
             }
         }
@@ -139,6 +141,15 @@ namespace SellBroCRMWPF.Auth
         private void ShowTrueJSON()
         {
             var uri = Instance.TrueJson;
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = uri;
+            System.Diagnostics.Process.Start(psi);
+        }
+
+        private void RedirectToGithub()
+        {
+            var uri = Instance.GithubLink;
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = uri;
