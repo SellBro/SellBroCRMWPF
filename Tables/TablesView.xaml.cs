@@ -52,7 +52,12 @@ namespace SellbroCRMWPF.Tables
             foreach (KeyValuePair<string, object> kvp in expando)
             {
                 MessageBox.Show(kvp.Value.ToString());
+                DataGridTextColumn column = new DataGridTextColumn();
+                column.Header = kvp.Value.ToString();
+                column.Binding = new Binding(kvp.Value.ToString());
+                dataGrid.Columns.Add(column);
             }
+            
             
             List<ExpandoObject> rows = new List<ExpandoObject>();
 
@@ -71,8 +76,13 @@ namespace SellbroCRMWPF.Tables
 
             for (int i = 0; i < maxLength; i++)
             {
-                
+                dynamic newRow = new ExpandoObject();
+                newRow.Names = "Names";
+                newRow.Lastnames = "lastname";
+                rows.Add(newRow);
+                dataGrid.Items.Add(newRow);
             }
+            
             
            // dataGrid.Items.Add(row);
 
