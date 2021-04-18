@@ -58,15 +58,11 @@
         </EventTrigger>
     </UserControl.Triggers>
     <Grid Background="#FFDEDEDE">
-        <Grid Name="GridMain" Height="500" Width="500">
+        <Grid Name="GridMain">
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="500"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20">
-                <Button Click="Button_Click" Width="100" Height="30" Content="AddColumn"/>
-            </StackPanel>
-            <Grid Grid.Row="1" Margin="20" MaxWidth="400">
+            <Grid Grid.Row="1" Margin="70,0,0,0">
                 <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto"
       ScrollViewer.HorizontalScrollBarVisibility="Auto"
@@ -95,7 +91,7 @@
                     </StackPanel>
                 </materialDesign:PopupBox>
             </StackPanel>
-            <TextBox materialDesign:HintAssist.Hint="{materialDesign:PackIcon Kind=Search}" ToolTip="Icon" Padding="100,3" Background="{StaticResource BackgroundPink}" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center" FontFamily="{StaticResource MontserratBold}" FontSize="22"/>
+            <TextBox materialDesign:HintAssist.Hint="Search" Padding="100,3" Background="{StaticResource BackgroundPink}" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center" FontFamily="{StaticResource MontserratBold}" FontSize="22"/>
         </Grid>
         <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="{StaticResource BackgroundLightPink}">
             <Grid.Effect>

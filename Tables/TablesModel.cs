@@ -23,7 +23,6 @@ namespace SellbroCRMWPF.Tables
                     _goToAuth = goToAuth;
                     Logout = new DelegateCommand(OnLogout);
                     Email = AuthenticationUser.GetInstance().Email;
-                    MessageBox.Show(Email);
                     GetAllTables();
                 }
         
