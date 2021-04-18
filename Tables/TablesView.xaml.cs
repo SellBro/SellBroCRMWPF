@@ -28,13 +28,11 @@ namespace SellbroCRMWPF.Tables
         {
             await TablesAPI.RequestAllTables();
            
-            // Should be called after RequestAllTable is awaited
             GetTableData();
         }
 
         private async void GetTableData(int tableNum = 1)
         {
-            // If no tables - create
             Table t = await TablesAPI.RequestTable() ?? await TablesAPI.CreateTable();
 
             DataTable dt = new DataTable();
@@ -44,7 +42,6 @@ namespace SellbroCRMWPF.Tables
             
             foreach (var fieldN in t.Fields)
             {
-                //MessageBox.Show("building expando" + fieldN.Name);
                 columnNames.Add(fieldN.Name);
                 var fieldNn = fieldN.Name;
                 ((IDictionary<String, Object>)expando)[fieldN.ToString()] = fieldNn;
@@ -52,13 +49,12 @@ namespace SellbroCRMWPF.Tables
 
             foreach (KeyValuePair<string, object> kvp in expando)
             {
-                //MessageBox.Show(kvp.Value.ToString());
                 DataGridTextColumn column = new DataGridTextColumn();
+                column.IsReadOnly = false;
                 column.Header = kvp.Value.ToString();
                 column.Binding = new Binding(kvp.Value.ToString());
                 dataGrid.Columns.Add(column);
             }
-            
             
             List<ExpandoObject> rows = new List<ExpandoObject>();
 
@@ -73,8 +69,6 @@ namespace SellbroCRMWPF.Tables
                 }
             }
 
-            //MessageBox.Show(maxLength.ToString());
-
             for (int i = 0; i < maxLength; i++)
             {
                 dynamic newRow = new ExpandoObject();
@@ -84,27 +78,7 @@ namespace SellbroCRMWPF.Tables
                 dataGrid.Items.Add(newRow);
             }
             
-            
-           // dataGrid.Items.Add(row);
-
-        /*foreach (var fieldName in t.Fields)
-        {
-            dt.Columns.Add(fieldName.Name);
-            MessageBox.Show(fieldName.Name);
-
-            foreach (var fieldValue in fieldName.Items)
-            {
-                DataRow row = dt.NewRow();
-                row[0] = fieldValue.Value;
-                dt.Rows.Add(row);
-            }
-        */
-            //}
-
-            //dataGrid.ItemsSource = dt.AsEnumerable();
             dataGrid.CanUserSortColumns = false;
-            //TODO: Use table date in the table
-            // MessageBox.Show(t.ToString());
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -127,11 +101,9 @@ namespace SellbroCRMWPF.Tables
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
                 case "ItemHome":
-                    //usc = new UserControlHome();
                     GridMain.Children.Add(usc);
-                    break;
-                case "ItemCreate": 
-                    // usc = new UserControlCreate();
+                    break; 
+                case "ItemCreate":
                     GridMain.Children.Add(usc);
                     break;
                 default:
