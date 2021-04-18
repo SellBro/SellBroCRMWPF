@@ -5,3 +5,4 @@ SellBro descktop WPF CRM with NodeJS API and PostgreSQL database.
 - [API](http://https://github.com/SellBro/sellbro-crm-api "API")
 - [C++/QT Version](http://https://github.com/SellBro/SellBroCRM "C++/QT Version")
 # Preview
+TBD
