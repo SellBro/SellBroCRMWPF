@@ -22,13 +22,14 @@ namespace SellbroCRMWPF.Tables
             InitializeComponent();
 
             GetAllTables();
-
-            GetTableData();
         }
 
         private async void GetAllTables()
         {
             await TablesAPI.RequestAllTables();
+           
+            // Should be called after RequestAllTable is awaited
+            GetTableData();
         }
 
         private async void GetTableData(int tableNum = 1)
@@ -43,7 +44,7 @@ namespace SellbroCRMWPF.Tables
             
             foreach (var fieldN in t.Fields)
             {
-                MessageBox.Show("building expando" + fieldN.Name);
+                //MessageBox.Show("building expando" + fieldN.Name);
                 columnNames.Add(fieldN.Name);
                 var fieldNn = fieldN.Name;
                 ((IDictionary<String, Object>)expando)[fieldN.ToString()] = fieldNn;
@@ -51,7 +52,7 @@ namespace SellbroCRMWPF.Tables
 
             foreach (KeyValuePair<string, object> kvp in expando)
             {
-                MessageBox.Show(kvp.Value.ToString());
+                //MessageBox.Show(kvp.Value.ToString());
                 DataGridTextColumn column = new DataGridTextColumn();
                 column.Header = kvp.Value.ToString();
                 column.Binding = new Binding(kvp.Value.ToString());
@@ -72,7 +73,7 @@ namespace SellbroCRMWPF.Tables
                 }
             }
 
-            MessageBox.Show(maxLength.ToString());
+            //MessageBox.Show(maxLength.ToString());
 
             for (int i = 0; i < maxLength; i++)
             {
