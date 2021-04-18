@@ -84,7 +84,7 @@
                 <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC" />
             </Grid.Effect>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="YoungRake" VerticalAlignment="Center" Foreground="White" FontFamily="{StaticResource MontserratRegular}" FontSize="16" />
+                <TextBlock Text="{Binding Email}" VerticalAlignment="Center" Foreground="White" FontFamily="{StaticResource MontserratRegular}" FontSize="16" />
                 <materialDesign:PopupBox Foreground="White" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10">
                     <StackPanel Width="150">
                         <Button Content="Settings" />

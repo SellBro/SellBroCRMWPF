@@ -8,19 +8,22 @@ using System.Windows.Data;
 using Prism.Commands;
 using SellBroCRMWPF;
 using SellBroCRMWPF.API;
+using SellBroCRMWPF.Auth;
 
 namespace SellbroCRMWPF.Tables
 {
     public class TablesModel
     {
                 private static Action _goToAuth;
-                
+                public string Email { get; set; }
                 public DelegateCommand Logout { get; }
                 public TablesModel(Action goToAuth)
                 {
                     
                     _goToAuth = goToAuth;
                     Logout = new DelegateCommand(OnLogout);
+                    Email = AuthenticationUser.GetInstance().Email;
+                    MessageBox.Show(Email);
                     GetAllTables();
                 }
         
