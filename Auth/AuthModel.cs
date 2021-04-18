@@ -20,6 +20,7 @@ namespace SellBroCRMWPF.Auth
         public DelegateCommand SignUpCommand { get; }
         public DelegateCommand TrueJSON { get; }
         public DelegateCommand GoToGithub { get; }
+        public DelegateCommand GoToWeb { get; }
 
         public AuthModel(Action goToApp, bool loadUI = true)
         {
@@ -29,8 +30,9 @@ namespace SellBroCRMWPF.Auth
             {
                 SignInCommand = new DelegateCommand(SignIn, ValidateFields);
                 SignUpCommand = new DelegateCommand(SignUp);
-                TrueJSON = new DelegateCommand(ShowTrueJSON);
-                GoToGithub = new DelegateCommand(RedirectToGithub);
+                TrueJSON = new DelegateCommand(() => RedirectTo((Instance.TrueJson)));
+                GoToGithub = new DelegateCommand(() => RedirectTo(Instance.GithubLink));
+                GoToWeb = new DelegateCommand(() => RedirectTo(Instance.WebsiteLink));
                 Directory.CreateDirectory(Variables.EnviromentPath);
             }
         }
@@ -138,21 +140,11 @@ namespace SellBroCRMWPF.Auth
             return !String.IsNullOrWhiteSpace(Email) && !String.IsNullOrWhiteSpace(Password);
         }
 
-        private void ShowTrueJSON()
+        private void RedirectTo(string link)
         {
-            var uri = Instance.TrueJson;
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
-            psi.FileName = uri;
-            System.Diagnostics.Process.Start(psi);
-        }
-
-        private void RedirectToGithub()
-        {
-            var uri = Instance.GithubLink;
-            var psi = new System.Diagnostics.ProcessStartInfo();
-            psi.UseShellExecute = true;
-            psi.FileName = uri;
+            psi.FileName = link;
             System.Diagnostics.Process.Start(psi);
         }
         

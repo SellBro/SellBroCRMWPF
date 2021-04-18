@@ -11,6 +11,7 @@
         private static string getTable = $"{baseURL}tables";
 
         private static string githubLink = "https://github.com/SellBro";
+        private static string websiteLink = "https://sellbro.vercel.app/";
 
         public static string MediaType => mediaType;
         
@@ -20,6 +21,8 @@
 
         public static string TrueJson => trueJSON;
         public static string GithubLink => githubLink;
+        public static string WebsiteLink => websiteLink;
+
         public static string GetTable => getTable;
     }
 }
