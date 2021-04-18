@@ -1,2 +1,7 @@
-# SellBroCRMWPF
- SellBro C# CRM Project
+# SellBro CRM
+## SellBro Desktop WPF CRM
+SellBro descktop WPF CRM with TypeScript API and PostgreSQL database
+## Additional Git Repositories
+- [API](http://https://github.com/SellBro/sellbro-crm-api "API")
+- [C++/QT Version](http://https://github.com/SellBro/SellBroCRM "C++/QT Version")
+# Preview
