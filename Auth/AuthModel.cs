@@ -15,6 +15,7 @@ namespace SellBroCRMWPF.Auth
         private static Action _goToApp;
         
         private bool saveData = true;
+        private static bool isLoading = false;
         
         public DelegateCommand SignInCommand { get; }
         public DelegateCommand SignUpCommand { get; }
@@ -29,7 +30,7 @@ namespace SellBroCRMWPF.Auth
             if (loadUI)
             {
                 SignInCommand = new DelegateCommand(SignIn, ValidateFields);
-                SignUpCommand = new DelegateCommand(SignUp);
+                SignUpCommand = new DelegateCommand(SignUp, ValidateFields);
                 TrueJSON = new DelegateCommand(() => RedirectTo((Instance.TrueJson)));
                 GoToGithub = new DelegateCommand(() => RedirectTo(Instance.GithubLink));
                 GoToWeb = new DelegateCommand(() => RedirectTo(Instance.WebsiteLink));
@@ -50,6 +51,7 @@ namespace SellBroCRMWPF.Auth
                     AuthenticationUser.GetInstance().Email = value;
                     OnPropertyChanged();
                     SignInCommand.RaiseCanExecuteChanged();
+                    SignUpCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -67,6 +69,7 @@ namespace SellBroCRMWPF.Auth
                     AuthenticationUser.GetInstance().Password = value;
                     OnPropertyChanged();
                     SignInCommand.RaiseCanExecuteChanged();
+                    SignUpCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -86,6 +89,8 @@ namespace SellBroCRMWPF.Auth
 
         public static async void SignIn()
         {
+            isLoading = true;
+            
             bool result = await UsersAPI.LoginPostRequest();
 
             if (result)

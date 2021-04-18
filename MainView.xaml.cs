@@ -51,12 +51,12 @@ namespace SellBroCRMWPF
 
         public void GoToAuth()
         {
-            Content = new AuthView(GoToAuth);
+            Content = new AuthView(GoToApp);
         }
-
+        
         public void GoToApp()
         {
-            Content = new TabletsView();
+            Content = new TablesView(GoToAuth);
         }
     }
 }

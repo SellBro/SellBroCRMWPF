@@ -18,6 +18,5 @@ namespace SellBroCRMWPF.Auth
         {
              _authModel.Password = PbPassword.Password;
         }
-
-            }
+    }
 }

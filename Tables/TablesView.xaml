@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SellbroCRMWPF.Tables.TabletsView"
+﻿<UserControl x:Class="SellbroCRMWPF.Tables.TablesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -91,7 +91,7 @@
                         <Button Content="Account" />
                         <Button Content="Help" />
                         <Separator />
-                        <Button Content="Logout" />
+                        <Button Content="Logout" Command="{Binding Logout}"/>
                     </StackPanel>
                 </materialDesign:PopupBox>
             </StackPanel>
