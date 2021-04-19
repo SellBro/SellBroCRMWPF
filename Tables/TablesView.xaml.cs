@@ -40,20 +40,8 @@ namespace SellbroCRMWPF.Tables
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserControl usc = null;
-            GridMain.Children.Clear();
-
-            switch (((ListViewItem) ((ListView) sender).SelectedItem).Name)
-            {
-                case "ItemHome":
-                    GridMain.Children.Add(usc);
-                    break;
-                case "ItemCreate":
-                    GridMain.Children.Add(usc);
-                    break;
-                default:
-                    break;
-            }
+            
+            
         }
 
         int runningIndex;
